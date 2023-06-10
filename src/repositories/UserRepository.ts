@@ -4,7 +4,10 @@ interface ICreate {
 	email: string;
 	password: string;
 }
-
+interface IPage{
+	page: number;
+	size: number
+}
 
 class UserRepository {
 	async findByEmail(email: string){
@@ -17,6 +20,12 @@ class UserRepository {
 			password,
 			email,
 		})
+		return result
+	}
+	async findAll({ page, size }: IPage){
+		const result = await User.find().skip((page -1) * size)
+		.limit(size)
+		.exec()
 		return result
 	}
 }

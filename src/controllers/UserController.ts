@@ -13,16 +13,34 @@ class UserController {
 
 
 
-	index(request: Request, response: Response, next: NextFunction){
+	async index(request: Request, response: Response, next: NextFunction){
 		//buscar todos
+		const { page, size } = request.query
+		const DEFAULT_PAGE = 1
+		const DEFAULT_SIZE = 10
+		const pageNumber = page ? parseInt(page as string, 10) : DEFAULT_PAGE
+		const pageSizeNumber = size ? parseInt(size as string, 10) : DEFAULT_SIZE
+		// console.log('parametros', page, size)
 		try{
+			const result = await this.userRepository.findAll({
+				page: pageNumber,
+				size: pageSizeNumber
+			})
+
+			return response.json(result)
 
 
 		} catch (error){
-			console.log(error)
+			next(error)
 		}
 
 	}
+
+
+
+
+
+
 	show(request: Request, response: Response, next: NextFunction){
 		//buscar apenas um
 	}
