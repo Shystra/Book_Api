@@ -14,7 +14,14 @@ class UserRoutes{
 		this.userController.store.bind(this.userController)
 		)
 		this.router.get('/',
-		this.userController.index.bind(this.userController))
+		this.userController.index.bind(this.userController)
+		)
+		this.router.get('/:id',
+		this.userController.show.bind(this.userController)
+		)
+		this.router.put('/:id',
+		this.userController.update.bind(this.userController)
+		)
 		return this.router
 	}
 }

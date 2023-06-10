@@ -1,4 +1,4 @@
-import { User } from "../modules";
+import { User } from "../models";
 interface ICreate {
 	name: string;
 	email: string;
@@ -28,6 +28,21 @@ class UserRepository {
 		.exec()
 		return result
 	}
+
+	async findById(id: string){
+		const result = User.findById(id)
+		return result
+	}
+
+	async updatePassword(password: string, id: string){
+		const result = await User.findById(id).updateOne({password})
+		return result
+	}
+	async updateName(name: string, id: string){
+		const result = await User.findById(id).updateOne({name})
+		return result
+	}
+
 }
 
 export { UserRepository }

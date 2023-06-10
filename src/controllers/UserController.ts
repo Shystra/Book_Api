@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { User } from "../modules";
-import { hash } from "bcrypt";
+import { User } from "../models";
+import { compare, hash } from "bcrypt";
 import { UserRepository } from "../repositories/UserRepository";
+
 
 
 class UserController {
@@ -41,9 +42,25 @@ class UserController {
 
 
 
-	show(request: Request, response: Response, next: NextFunction){
+	async show(request: Request, response: Response, next: NextFunction){
 		//buscar apenas um
+		const { id } = request.params
+		try{
+			const result = await this.userRepository.findById(id)
+			return response.json(result)
+
+
+		}catch (error){
+			next(error)
+		}
 	}
+
+
+
+
+
+
+
 	async store(request: Request, response: Response, next: NextFunction){
 		// criar
 		const { name, password, email } = request.body
@@ -55,8 +72,11 @@ class UserController {
 			}
 
 			const hashPassword = await hash( password, 10 )
-			const createUser = await this.userRepository.create({ name, password: hashPassword, email})
-
+			const createUser = await this.userRepository.create({
+				name,
+				password: hashPassword,
+				email,
+			});
 			return response.json( createUser )
 
 
@@ -67,7 +87,39 @@ class UserController {
 
 
 	}
-	update(request: Request, response: Response, next: NextFunction){
+	 async update(request: Request, response: Response, next: NextFunction){
+		const { id } = request.params;
+		const { name, password, oldPassword } = request.body
+
+
+		try{
+			const findUser = await this.userRepository.findById(id)
+			if(!findUser){
+				throw new Error('User not found')
+			}
+			if(password && oldPassword && findUser.password){
+				const passwordMatch = await compare(oldPassword, findUser.password)
+				if(!passwordMatch){
+					throw new Error('Password dosent`t match')
+				}
+				const hashPassword = await hash( password, 10 )
+
+				await this.userRepository.updatePassword(hashPassword, id)
+			}
+
+			if(name){
+				await this.userRepository.updateName(name, id)
+			}
+
+
+			return response.json({message: "Updated sucessfully"})
+
+		} catch(error){
+			next(error)
+		}
+
+
+
 
 	}
 
