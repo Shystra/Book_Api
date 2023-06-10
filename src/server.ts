@@ -7,7 +7,7 @@ const userRoutes = new UserRoutes().getRoutes()
 const dataBase = new DbConnection()
 
 app.use(express.json())
-app.use('/', userRoutes)
+app.use('/user', userRoutes)
 
 app.use(express.urlencoded({ extended: true }))
 // to format URL to leave more readable
