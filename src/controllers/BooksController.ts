@@ -8,15 +8,27 @@ class BooksController {
 	constructor(){
 		this.booksRepository = new BooksRepository
 	}
-	store(request: Request, response:Response, next:NextFunction){
+	async store(request: Request, response:Response, next:NextFunction){
 		const { name, author, company, read, dateRead, description, rate } = request.body
 		const { user_id } = request
 		try {
-			console.log(name, user_id)
+			// console.log(name, user_id)
+			const result = await this.booksRepository.create({
+				name,
+				author,
+				company,
+				read,
+				dateRead,
+				description,
+				rate,
+				user_id
+			})
 
 
 
 
+
+			return response.status(201).json(result)
 
 		}catch (error){
 			next(error)
