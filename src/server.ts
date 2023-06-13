@@ -1,13 +1,17 @@
 import express, { NextFunction, Request, Response, Application } from 'express'
 import { UserRoutes } from './routes/user.routes'
 import { DbConnection } from './dataBase'
+import { BooksRoutes } from './routes/books.routes'
 
 const app: Application = express()
 const userRoutes = new UserRoutes().getRoutes()
+const booksRoutes = new BooksRoutes().getRoutes()
 const dataBase = new DbConnection()
 
 app.use(express.json())
 app.use('/user', userRoutes)
+
+app.use('/books', booksRoutes)
 
 app.use(express.urlencoded({ extended: true }))
 // to format URL to leave more readable
