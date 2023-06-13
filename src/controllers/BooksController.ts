@@ -12,30 +12,32 @@ class BooksController {
 		const { name, author, company, read, dateRead, description, rate } = request.body
 		const { user_id } = request
 		try {
-			// console.log(name, user_id)
-			const result = await this.booksRepository.create({
-				name,
-				author,
-				company,
-				read,
-				dateRead,
-				description,
-				rate,
-				user_id
+			const findBooksByUserId = await this.booksRepository.findByUserId(user_id)
+			const filterBooks = findBooksByUserId.find((filter, index) => {
+				return (
+					filter.name &&
+					StringFormatter.formatString(filter.name) ===
+					StringFormatter.formatString(name)
+				)
+
 			})
-
-
-
-
-
-			return response.status(201).json(result)
+			if(filterBooks){
+				throw new Error('Book already exists.')
+			}
 
 		}catch (error){
 			next(error)
 		}
+	}
+}
 
+class StringFormatter{
+	static formatString(str:string){
+		str = str.toLowerCase()
+		str = str.trim()
+		str = str.normalize('NFD')
 
-
+		return str
 	}
 }
 

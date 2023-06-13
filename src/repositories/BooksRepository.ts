@@ -37,6 +37,12 @@ class BooksRepository {
 
 	}
 
+	async	findByUserId(user_id: string){
+		const result = await Books.find({ user_id })
+		return result
+	}
+
 }
+
 
 export { BooksRepository }
