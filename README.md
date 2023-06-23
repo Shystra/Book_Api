@@ -13,3 +13,4 @@ Não é possivel cadastrar um usuário com email ja existente
 Não é possivel cadastrar o mesmo livro
 Nao é possivel deletar uma conta inexistente
 Não é possivel deletar um livro inexistente
+Não é possivel atribuir nenhuma nota ao livro que ainda nao foi lido.
