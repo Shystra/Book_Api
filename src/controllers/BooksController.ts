@@ -65,8 +65,20 @@ class BooksController {
 			}catch(error){
 				next(error)
 			}
+		}
+
+		async delete(request:Request, response:Response, next:NextFunction){
+			const {id} = request.params
+			try{
+				const findById = await this.booksRepository.findById(id)
+				console.log('file: BooksController', findById)
+				return response.json()
 
 
+
+			} catch(error){
+				next(error)
+			}
 		}
 }
 

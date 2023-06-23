@@ -47,11 +47,15 @@ class BooksRepository {
 		return result
 	}
 
-	async findPaginateByUserId({user_id, page, size}: IBookPaginate){
+	findPaginateByUserId({user_id, page, size}: IBookPaginate){
 		const result = Books.find({ user_id })
 		.skip((page - 1)*size)
 		.limit(size).exec()
 		return result
+	}
+
+	findById(id: string){
+		return Books.findById(id).exec()
 	}
 
 

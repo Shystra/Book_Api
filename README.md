@@ -2,10 +2,10 @@
 
 [X] - Cadastro de usuário (name, password, email)
 [X] - Cadastro de livro (name, author, company, read, dateRead, description, rate)
-[] - Listagem de livros do usuário
-[] - Atualizar usuário
+[X] - Listagem de livros do usuário
+[X] - Atualizar usuário
 [] - Deletar Livro
-[] - Deletar Usuário
+[X] - Deletar Usuário
 
 ## Regras de Negócio
 
