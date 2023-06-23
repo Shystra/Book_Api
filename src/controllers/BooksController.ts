@@ -43,10 +43,24 @@ class BooksController {
 			})
 			return response.status(201).json(result)
 
-		}catch (error){
-			next(error)
-		}
+			}catch (error){
+				next(error)
+			}
 	}
+
+		async index(request:Request, response:Response, next:NextFunction){
+			const { user_id } = request
+			try{
+				const findBooksByUserId = await this.booksRepository.findByUserId(user_id)
+				return response.json(findBooksByUserId)
+				// console.log('findbooksbyUserId:', findBooksByUserId)
+
+			}catch(error){
+				next(error)
+			}
+
+
+		}
 }
 
 class StringFormatter{
