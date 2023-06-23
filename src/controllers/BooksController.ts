@@ -49,9 +49,16 @@ class BooksController {
 	}
 
 		async index(request:Request, response:Response, next:NextFunction){
+			const { page, size } = request.query
 			const { user_id } = request
+
+			const DEFAULT_PAGE = 1
+			const DEFAULT_SIZE = 1
 			try{
-				const findBooksByUserId = await this.booksRepository.findByUserId(user_id)
+				const pageNumber = page ? parseInt(page as string) : DEFAULT_PAGE
+				const sizeNumber = size ? parseInt(size as string) : DEFAULT_SIZE
+				const findBooksByUserId = await this.booksRepository.findPaginateByUserId(
+					{user_id, page:pageNumber, size:sizeNumber})
 				return response.json(findBooksByUserId)
 				// console.log('findbooksbyUserId:', findBooksByUserId)
 
