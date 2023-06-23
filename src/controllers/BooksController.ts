@@ -26,6 +26,10 @@ class BooksController {
 			if(filterBooks){
 				throw new Error('Book already exists.')
 			}
+			if(!readVerify && rate){
+				throw new Error('You can grade only books that have benn read.')
+			}
+
 
 			const result = await this.booksRepository.create({
 				name,
