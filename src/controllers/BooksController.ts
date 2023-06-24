@@ -68,14 +68,22 @@ class BooksController {
 		}
 
 		async delete(request:Request, response:Response, next:NextFunction){
-			const {id} = request.params
+			const { id } = request.params
+			const { user_id } = request
+
 			try{
-				const findById = await this.booksRepository.findById(id)
+				const findById = await this.booksRepository.findById(id, user_id)
 				console.log('file: BooksController', findById)
-				return response.json()
+
+				if(findById.length < 0){
+					throw new Error('Book not found')
+				}
+				const result = await this.booksRepository.delete(id)
 
 
 
+
+				return response.json(result)
 			} catch(error){
 				next(error)
 			}

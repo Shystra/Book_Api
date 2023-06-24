@@ -54,10 +54,15 @@ class BooksRepository {
 		return result
 	}
 
-	findById(id: string){
-		return Books.findById(id).exec()
+	findById(id: string, user_id: string){
+		return Books.find({_id: id, user_id}).exec()
 	}
 
+	async delete(id: string,){
+		const result = await Books.findByIdAndRemove(id)
+
+		return result
+	}
 
 
 
