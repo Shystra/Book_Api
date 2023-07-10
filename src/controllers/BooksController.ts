@@ -88,6 +88,28 @@ class BooksController {
 				next(error)
 			}
 		}
+
+
+		update(request:Request, response:Response, next:NextFunction){
+			const { rate } = request.body
+
+			try{
+				// nota = de 0 até 5
+				if(rate < 0 || rate > 5){
+					throw new Error('Only rate between 0 and 5.')
+				}
+
+				return response.json()
+
+
+			}catch(error){
+				next(error)
+			}
+		}
+
+
+
+
 }
 
 class StringFormatter{
