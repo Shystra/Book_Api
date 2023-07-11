@@ -15,6 +15,13 @@ interface IBookPaginate{
 				page: number,
 				size: number
 }
+
+interface IUpdate{
+	rate: number
+	dateRead: Date
+	read: boolean
+	id: string
+}
 class BooksRepository {
 	async create({
 				name,
@@ -64,7 +71,9 @@ class BooksRepository {
 		return result
 	}
 
-
+	update({ rate, id , read, dateRead}: IUpdate ){
+		return Books.findById(id).updateMany({rate, dateRead, read}).exec()
+	}
 
 
 
