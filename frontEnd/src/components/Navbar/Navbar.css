@@ -1,0 +1,47 @@
+.app__navbar{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem 2rem;
+	background-color: black;
+	border-radius: 25px 25px 25px 25px;
+
+}
+
+.app__navbar-logo{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+
+}
+
+.app__navbar-logo img{
+	width: 200px;
+
+}
+
+.app__navbar-links{
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	list-style: none;
+
+
+}
+.app__navbar-links li{
+	cursor: pointer;
+	margin: 0 2rem;
+	text-decoration: none;
+	transition: 0.5s ease;
+
+}
+
+.app__navbar-links_icons svg{
+	color: white;
+	margin: 0.5rem;
+	font-size: 24px;
+	cursor: pointer;
+}
+
