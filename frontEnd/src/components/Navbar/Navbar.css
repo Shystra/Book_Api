@@ -117,7 +117,6 @@
 
 
 
-
 @media screen and (max-width: 2000px){
 	.app__navbar{
 		width: auto;
@@ -167,12 +166,9 @@
 		margin: auto;
 		margin-top: auto;
 		width: auto;
-
 	}
-
-
-
 }
+
 
 @media screen and (max-width: 650px){
 	.app__navbar{
