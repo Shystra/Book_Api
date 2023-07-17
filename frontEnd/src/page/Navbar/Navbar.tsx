@@ -9,6 +9,7 @@ import {GiHamburgerMenu} from 'react-icons/gi';
 import {CgClose} from 'react-icons/cg'
 
 import './Navbar.css';
+import { Header } from '../Header/Header';
 
 export const Navbar = () => {
 	const [toggleMenu, setToggleMenu] = useState(false)
@@ -62,7 +63,9 @@ export const Navbar = () => {
     )}
 
 				</div>
+		
 			</nav>
+ 
 
 
 
